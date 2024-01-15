@@ -1,11 +1,20 @@
 package com.example.finalproject
 
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.finalproject.data.User
 import com.example.finalproject.data.UsersRepository
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 
 class LoginViewModel(private val userRepository: UsersRepository) : ViewModel() {
 
@@ -34,6 +43,13 @@ class LoginViewModel(private val userRepository: UsersRepository) : ViewModel() 
         if (validateInput()) {
             userRepository.insertUser(userUiState.userDetails.toUser())
         }
+    }
+
+    fun isUserExist(username: String, password: String): Boolean {
+
+        // Will be implemented
+
+        return true
     }
 }
 

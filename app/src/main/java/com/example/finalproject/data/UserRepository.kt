@@ -8,6 +8,8 @@ interface UsersRepository {
 
     fun getUserStream(id: Int): Flow<User?>
 
+    fun getUserStreamByUsername(username: String): Flow<User?>
+
     suspend fun insertUser(ind: User)
 
     suspend fun deleteUser(ind: User)

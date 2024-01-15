@@ -17,7 +17,8 @@ object RetrofitClient {
         .addInterceptor { chain ->
             val originalRequest = chain.request()
             val newRequest = originalRequest.newBuilder()
-                .header("X-RapidAPI-Key", "a635bccb3cmsh01b74485ceab4eap135a0ajsncadc94798afe") // Replace with your actual API key
+                // arda api key: cc5d069fcfmsh0d5abd1bdb7fafdp1178c9jsn4088888bdf0b
+                .header("X-RapidAPI-Key", "cc5d069fcfmsh0d5abd1bdb7fafdp1178c9jsn4088888bdf0b") // Replace with your actual API key
                 .header("X-RapidAPI-Host", "api-football-v1.p.rapidapi.com")
                 .build()
             chain.proceed(newRequest)

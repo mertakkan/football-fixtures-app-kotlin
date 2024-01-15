@@ -9,7 +9,7 @@ interface ApiService {
         @Query("date") date: String,
         @Query("league") leagueId: Int,
         @Query("season") season: Int,
-        @Query("status") status: String = "FT" // Not Started
+        @Query("status") status: String = "NS" // Not Started
     ): retrofit2.Call<FixtureResponse>
 }
 
