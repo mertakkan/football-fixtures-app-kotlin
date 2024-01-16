@@ -10,9 +10,20 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 object AppViewModelProvider {
     val Factory = viewModelFactory {
 
-        // Initializer for ItemEntryViewModel
+
+        initializer {
+            MainViewModel()
+        }
+
         initializer {
             LoginViewModel(tabelaApplication().container.userRepository)
+        }
+
+        initializer {
+            ProfileViewModel(
+                tabelaApplication().container.userRepository,
+                this.createSavedStateHandle()
+            )
         }
     }
 }

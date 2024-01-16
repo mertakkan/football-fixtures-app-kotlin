@@ -9,10 +9,18 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.finalproject.data.User
 import com.example.finalproject.data.UsersRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.firstOrNull
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.last
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 
@@ -45,11 +53,29 @@ class LoginViewModel(private val userRepository: UsersRepository) : ViewModel() 
         }
     }
 
-    fun isUserExist(username: String, password: String): Boolean {
+    suspend fun isUserExist(username: String, password: String): Boolean {
 
-        // Will be implemented
+        var isExist: Boolean = false
 
-        return true
+        val userObject: Flow<User?> =
+            userRepository.getUserStreamByUsername(username)
+
+
+        if (userObject.firstOrNull() == null) return false
+
+        val uiState: UserUiState = userObject
+            .filterNotNull()
+            .map {
+                UserUiState(userDetails = it.toUserDetails())
+            }
+            .first()
+
+        if (uiState.userDetails.username == username &&
+            uiState.userDetails.password == password) {
+            isExist = true
+        }
+
+        return isExist
     }
 }
 

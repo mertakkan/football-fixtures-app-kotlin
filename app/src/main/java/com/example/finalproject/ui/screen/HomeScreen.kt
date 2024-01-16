@@ -38,8 +38,9 @@ import com.example.finalproject.PhonebookTopAppBar
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
+    currentUsername: String,
     viewModel: MainViewModel = viewModel(),
-    navigateProfile : () -> Unit
+    navigateProfile : (Int) -> Unit
 ) {
     val matches by viewModel.fixtures.observeAsState(emptyList())
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
@@ -58,10 +59,19 @@ fun HomeScreen(
                 title = "Home",
                 isProfilePicVisible = true,
                 scrollBehavior = scrollBehavior,
-                navigateProfile = navigateProfile
+                userId = 1,
+                navigateProfile = navigateProfile,
+                navigateBack = {}
             )
         }
     ) {innerPadding ->
+
+        println("currentUserId: $currentUsername")
+        Text(
+            text = "viewModel.userId.toString(): $currentUsername",
+            modifier = Modifier
+                .padding(innerPadding)
+        )
 
         LazyColumn(
             modifier = Modifier

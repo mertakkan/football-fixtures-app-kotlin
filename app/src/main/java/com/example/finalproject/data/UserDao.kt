@@ -22,7 +22,7 @@ interface UserDao {
     @Query("SELECT * from user WHERE id == :id")
     fun getUser(id: Int): Flow<User>
 
-    @Query("SELECT * from user WHERE username == :username")
+    @Query("SELECT * from user WHERE username == :username LIMIT 1")
     fun getUserByUsername(username: String): Flow<User>
 
     @Query("SELECT * from user ORDER by name ASC")

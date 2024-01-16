@@ -43,7 +43,9 @@ fun PhonebookTopAppBar(
     isProfilePicVisible: Boolean,
     modifier: Modifier = Modifier,
     scrollBehavior: TopAppBarScrollBehavior? = null,
-    navigateProfile: () -> Unit = {}
+    userId: Int,
+    navigateProfile: (Int) -> Unit,
+    navigateBack: () -> Unit
 ) {
     CenterAlignedTopAppBar(
         title = { Text(title) },
@@ -59,10 +61,17 @@ fun PhonebookTopAppBar(
                         .clip(CircleShape)
                         .padding(10.dp)
                         .border(width = 2.dp, color = Color.Black, shape = CircleShape)
-                        .clickable { navigateProfile() },
+                        .clickable { navigateProfile(userId) },
                     contentScale = ContentScale.Crop,
                     alignment = Alignment.TopStart
                 )
+            } else {
+                IconButton(onClick = navigateBack) {
+                    Icon(
+                        imageVector = Icons.Filled.ArrowBack,
+                        contentDescription = "Back"
+                    )
+                }
             }
         }
     )

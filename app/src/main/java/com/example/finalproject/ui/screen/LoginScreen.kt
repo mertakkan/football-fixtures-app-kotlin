@@ -36,7 +36,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun LoginScreen(
     viewModel: LoginViewModel = viewModel(factory = AppViewModelProvider.Factory),
-    navigateHome: () -> Unit
+    navigateHome: (String) -> Unit
 ) {
 
     val coroutineScope = rememberCoroutineScope()
@@ -74,7 +74,10 @@ fun LoginScreen(
             PhonebookTopAppBar(
                 title = titleText,
                 isProfilePicVisible = false,
-                scrollBehavior = scrollBehavior
+                userId = -1,
+                navigateProfile = {},
+                scrollBehavior = scrollBehavior,
+                navigateBack = {}
             )
         },
     ) {innerPadding ->
@@ -158,8 +161,10 @@ fun LoginScreen(
                                 viewModel.userUiState.userDetails.username != "" &&
                                 viewModel.userUiState.userDetails.password != ""
                             ) {
+                                println("viewModel.userUiState.userDetails.id: ${viewModel.userUiState.userDetails.id}")
                                 viewModel.saveUser()
-                                navigateHome()
+                                println("viewModel.userUiState.userDetails.id: ${viewModel.userUiState.userDetails.id}")
+                                navigateHome(viewModel.userUiState.userDetails.username)
                             } else {
                                 Toast.makeText(context, "Textfields should not be empty!", Toast.LENGTH_SHORT).show()
                             }
@@ -174,9 +179,12 @@ fun LoginScreen(
                                         viewModel.userUiState.userDetails.username,
                                         viewModel.userUiState.userDetails.password
                                 )) {
-                                    navigateHome()
+                                    println("viewModel.userUiState.userDetails.id: ${viewModel.userUiState.userDetails.id}")
+                                    navigateHome(viewModel.userUiState.userDetails.username)
                                 } else {
                                     Toast.makeText(context, "Your credentials are incorrect!", Toast.LENGTH_SHORT).show()
+                                    println("viewModel.userUiState: ${viewModel.userUiState.userDetails}")
+
                                 }
                             }
                         }
