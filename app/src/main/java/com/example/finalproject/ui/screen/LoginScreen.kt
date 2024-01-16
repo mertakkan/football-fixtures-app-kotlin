@@ -75,6 +75,7 @@ fun LoginScreen(
                 title = titleText,
                 isProfilePicVisible = false,
                 userId = -1,
+                canNavigateBack = false,
                 navigateProfile = {},
                 scrollBehavior = scrollBehavior,
                 navigateBack = {}

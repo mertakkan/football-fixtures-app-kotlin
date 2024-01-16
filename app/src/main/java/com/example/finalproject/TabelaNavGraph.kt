@@ -46,7 +46,8 @@ fun TabelaNavHost(
             })
         ) {
             ProfileScreen(
-                navigateBack = { navController.popBackStack() }
+                navigateBack = { navController.popBackStack() },
+                logout = { navController.popBackStack("login", inclusive = false)}
             )
         }
     }

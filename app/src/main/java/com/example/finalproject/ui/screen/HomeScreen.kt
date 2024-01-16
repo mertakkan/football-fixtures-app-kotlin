@@ -60,6 +60,7 @@ fun HomeScreen(
                 isProfilePicVisible = true,
                 scrollBehavior = scrollBehavior,
                 userId = 1,
+                canNavigateBack = false,
                 navigateProfile = navigateProfile,
                 navigateBack = {}
             )
@@ -67,11 +68,6 @@ fun HomeScreen(
     ) {innerPadding ->
 
         println("currentUserId: $currentUsername")
-        Text(
-            text = "viewModel.userId.toString(): $currentUsername",
-            modifier = Modifier
-                .padding(innerPadding)
-        )
 
         LazyColumn(
             modifier = Modifier

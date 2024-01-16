@@ -44,6 +44,7 @@ fun PhonebookTopAppBar(
     modifier: Modifier = Modifier,
     scrollBehavior: TopAppBarScrollBehavior? = null,
     userId: Int,
+    canNavigateBack: Boolean,
     navigateProfile: (Int) -> Unit,
     navigateBack: () -> Unit
 ) {
@@ -65,7 +66,7 @@ fun PhonebookTopAppBar(
                     contentScale = ContentScale.Crop,
                     alignment = Alignment.TopStart
                 )
-            } else {
+            } else if (canNavigateBack) {
                 IconButton(onClick = navigateBack) {
                     Icon(
                         imageVector = Icons.Filled.ArrowBack,

@@ -1,9 +1,11 @@
 package com.example.finalproject.ui.screen
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -16,6 +18,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
@@ -45,11 +48,13 @@ import com.example.finalproject.AppViewModelProvider
 import com.example.finalproject.PhonebookTopAppBar
 import com.example.finalproject.ProfileViewModel
 import com.example.finalproject.R
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProfileScreen(
     navigateBack: () -> Unit,
+    logout: () -> Unit,
     viewModel: ProfileViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
 
@@ -78,6 +83,7 @@ fun ProfileScreen(
                 title = "Profile",
                 isProfilePicVisible = false,
                 userId = -1,
+                canNavigateBack = true,
                 navigateProfile = {},
                 navigateBack = navigateBack
             )
@@ -164,6 +170,20 @@ fun ProfileScreen(
                 enabled = isEditable,
                 singleLine = true
             )
+
+            OutlinedButton(
+                onClick = {
+                    logout()
+                },
+                shape = MaterialTheme.shapes.small,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 50.dp)
+                    .padding(horizontal = 25.dp)
+            ) {
+                Text("Logout")
+            }
+
         }
 
     }
@@ -173,6 +193,7 @@ fun ProfileScreen(
 @Composable
 fun ProfilePreview() {
     ProfileScreen(
-        navigateBack = {}
+        navigateBack = {},
+        logout = {}
     )
 }
