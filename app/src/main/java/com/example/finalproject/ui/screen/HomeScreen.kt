@@ -1,9 +1,12 @@
 package com.example.finalproject.ui.screen
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -35,6 +38,7 @@ import com.example.finalproject.Fixture
 import com.example.finalproject.MainViewModel
 import com.example.finalproject.PhonebookTopAppBar
 
+@RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
@@ -72,7 +76,7 @@ fun HomeScreen(
         LazyColumn(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(600.dp)
+                .fillMaxHeight()
                 .padding(innerPadding),
             contentPadding = PaddingValues(16.dp),
             verticalArrangement = Arrangement.spacedBy(4.dp),
