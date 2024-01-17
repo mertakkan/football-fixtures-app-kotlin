@@ -36,12 +36,13 @@ class ProfileViewModel(
         println("uiState in profile: ${uiState.value}")
     }
 
-    fun updateInd(name: String, surname: String, phoneNumber: String) {
+    fun updateInd(name: String, surname: String, profilePicId: String) {
         viewModelScope.launch {
             val currentInd = uiState.value.userDetails.toUser()
             userRepository.updateUser(currentInd.copy(
                 name = name,
                 surname = surname,
+                profilePicId = profilePicId
                 )
             )
         }

@@ -53,7 +53,7 @@ fun HomeScreen(
     println("matches: $matches")
 
     Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+        modifier = Modifier,
         topBar = {
             PhonebookTopAppBar(
                 title = "Home",
